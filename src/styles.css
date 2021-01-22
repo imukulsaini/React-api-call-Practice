@@ -1,0 +1,10 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.outPut{
+border:1px black solid;
+min-height: 10vh;
+margin-top: 2em;
+max-height: 10vh;
+}
