@@ -7,13 +7,19 @@ export default function App() {
   var serverApi = "https://api.funtranslations.com/translate/minion.json";
 
   const [text, setText] = useState('');
-
+  const [ output,setOutput] = useState('')
+  
+  function apiHandler(text) {
+    return serverApi + "?text=" + text;
+  }
+  
   function fetchHandler(text) {
-    fetch(
-      apiHandler(text)
-        .then((response) => response.json())
-        .then((json) => console.log(json))
-    );
+   
+      fetch(apiHandler(text)).then(response => response.json).then(json =>{
+        var finalOutput = json.contents.text;
+        setOutput(finalOutput);
+
+      })
   }
 
   function inputHandler(event) {
@@ -21,10 +27,7 @@ export default function App() {
     setText(userInput);
   }
 
-  function apiHandler(text) {
-    var abc = serverApi + "?text=" + text;
-    console.log(abc);
-  }
+
   return (
     <div className="App">
       <h1>
@@ -41,7 +44,7 @@ export default function App() {
         style={{ width: "50%", height: "10vh" }}
       ></input>
       <button onClick={fetchHandler}> Click Here</button>
-      <div className="outPut">{text}</div>
+      <div className="outPut">{output}</div>
     </div>
   );
 }
